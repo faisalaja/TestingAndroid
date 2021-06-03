@@ -2,8 +2,10 @@ package com.koanba.testingandroid.ui.list
 
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.koanba.testingandroid.R
 import com.koanba.testingandroid.data.list.Data
 import com.koanba.testingandroid.databinding.ItemListBinding
 
@@ -21,7 +23,7 @@ class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Log.d("TAG", "bind: ")
         Glide.with(itemView.context)
             .asBitmap()
-            .placeholder(android.R.color.darker_gray)
+            .placeholder(ContextCompat.getDrawable(itemView.context, R.drawable.placeholder_circle))
             .circleCrop()
             .load(data.avatar)
             .into(itemBinding.listIcon)
