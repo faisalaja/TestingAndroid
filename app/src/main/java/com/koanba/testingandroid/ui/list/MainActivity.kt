@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mainAdapter: MainAdapter
+    private var numberPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +20,23 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setContentView(mainBinding.root)
 
-        mainViewModel.getList(1)
+        mainBinding.apply {
+            btnNext.setOnClickListener {
+                numberPage += 1
+                setPageList(numberPage)
+            }
+            btnPrev.setOnClickListener {
+                if (numberPage != 1) {
+                    numberPage -= 1
+                    setPageList(numberPage)
+                }
+            }
+        }
+
         mainViewModel.getListUser.observe(this, {
+
+            mainBinding.pageNumber.text = it.page.toString()
+
             mainAdapter = MainAdapter(it.data)
             mainBinding.rvMain.apply {
                 layoutManager = LinearLayoutManager(
@@ -36,5 +52,14 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setPageList(numberPage)
+    }
+
+    private fun setPageList(pageNumber: Int) {
+        mainViewModel.getList(pageNumber)
     }
 }
