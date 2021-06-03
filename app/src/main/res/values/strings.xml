@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Testing Android</string>
+    <string name="login_page">Login Page</string>
+    <string name="list_page">List User</string>
+    <string name="err_null_email">Silahkan Isi Email Anda!</string>
+    <string name="err_null_password">Silahkan Isi Password Anda!</string>
+    <string name="err_null_account">Masukkan Akun Anda!</string>
+</resources>
